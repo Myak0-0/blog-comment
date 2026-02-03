@@ -1,0 +1,42 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  font-family: sans-serif;
+}
+
+.header {
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header a {
+  color: var(--primary);
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.1s;
+}
+.header a:hover {
+  color: color-mix(in srgb, var(--primary), black 10%);
+}
+
+.header nav {
+  display: flex;
+  gap: 10px;
+}
+
+.mainContent {
+  flex: 1;
+  margin: 20px 5%;
+}
+
+.footer {
+  background-color: #eee;
+  padding: 20px;
+  text-align: center;
+  margin-top: 2rem;
+}

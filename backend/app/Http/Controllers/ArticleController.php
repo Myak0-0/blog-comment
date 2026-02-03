@@ -3,18 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
+use App\Models\Comment;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
-    public function get_articles() {
-        return response()->json(Article::all());
+    public function get_comments() {
+        return response()->json(Comment::all());
     }
 
-    public function get_one_article(Article $article)
+    public function get_articles() {
+        return response()->json(Article::orderBy('created_at', 'desc')->get());
+    }
+
+    public function get_one_article(Article $id)
     {
-        return response()->json($article);
+        $id->load('comments'); 
+        return response()->json($id);
     }
 
     public function add_article(Request $request)
@@ -32,7 +38,7 @@ class ArticleController extends Controller
         return response()->json($article);
     }
 
-    public function add_comment_to_article(Request $request, Article $article)
+    public function add_comment_to_article(Request $request, Article $id)
     {
         $validator = Validator::make($request->all(), [
             'author_name' => 'required|string|max:255',
@@ -42,7 +48,7 @@ class ArticleController extends Controller
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
-        $comment = $article->comments()->create($request->all());
+        $comment = $id->comments()->create($request->all());
 
         return response()->json($comment, 201);
     }
