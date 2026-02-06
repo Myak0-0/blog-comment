@@ -2,6 +2,7 @@
 
 ### 1. Backend (Laravel API)
 Убедитесь, что Docker Desktop запущен.
+powershell заходим в папку проекта
 cd backend
 cp .env.example .env
 # Установка зависимостей
@@ -15,7 +16,7 @@ DB_DATABASE=blog_comment
 DB_USERNAME=sail
 DB_PASSWORD=password
 
-В WSL консоли, в папке backend
+В WSL консоли, в той же папке backend
 ./vendor/bin/sail up -d
 ./vendor/bin/sail artisan key:generate
 
